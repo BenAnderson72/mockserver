@@ -18,7 +18,7 @@ func TestMockHandlerFiltersFileBackedDataByConfiguredHeader(t *testing.T) {
 		status:       http.StatusOK,
 		mockFileData: []byte(`[{"id":1,"name":"John"},{"id":2,"name":"Jane"}]`),
 		routecfg: msconfig.RouteConfig{
-			FilterHeaders: map[string]string{"X-Account-ID": "id"},
+			HeaderParams: map[string]string{"X-Account-ID": "id"},
 		},
 	}
 	app := fiber.New()

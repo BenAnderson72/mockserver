@@ -384,7 +384,7 @@ File-backed mock routes can also map request headers to fields used for filterin
 
 ```json
 {
-  "filter_headers": {
+  "header_params": {
     "X-User-ID": "id"
   }
 }

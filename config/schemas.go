@@ -250,7 +250,7 @@ type RouteConfig struct {
 	RequestHeaders map[string]ParamDef `json:"request_headers,omitempty" yaml:"request_headers,omitempty"`
 
 	// Request headers mapped to mock data fields for filtering file-backed mocks
-	FilterHeaders map[string]string `json:"filter_headers,omitempty" yaml:"filter_headers,omitempty"`
+	HeaderParams map[string]string `json:"header_params,omitempty" yaml:"header_params,omitempty"`
 
 	// Schema for request body validation
 	// BodySchema map[string]interface{} `json:"body_schema,omitempty" yaml:"body_schema,omitempty"` [OLD]

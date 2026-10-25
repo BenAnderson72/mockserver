@@ -22,7 +22,7 @@ MockServer includes advanced filtering for mock responses. Supported query param
      ?status=active
      ```
    * Supports `string`, `number`, and `boolean` fields.
-   * Routes can map request headers to mock data fields with `filter_headers`. For example, `"filter_headers": {"X-User-ID": "id"}` lets `X-User-ID: 2` filter records whose `id` is `2`. A query parameter takes precedence if both specify the same field.
+   * Routes can map request headers to mock data fields with `header_params`. For example, `"header_params": {"X-User-ID": "id"}` lets `X-User-ID: 2` filter records whose `id` is `2`. A query parameter takes precedence if both specify the same field.
 
 2. **"Like" Filtering**
 

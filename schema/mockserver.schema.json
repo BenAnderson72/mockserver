@@ -143,7 +143,7 @@
             },
             "additionalProperties": false
           },
-          "filter_headers": {
+          "header_params": {
             "type": "object",
             "description": "Request headers mapped to mock data fields for filtering file-backed mocks.",
             "patternProperties": {

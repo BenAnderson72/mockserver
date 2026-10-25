@@ -1,3 +1,10 @@
 https://github.com/BenAnderson72/mockserver
 
 https://github.com/onurartan/mockserver
+
+
+          "when": "request.headers.X-User-ID == '500'",
+          "then": {
+            "status": 500,
+            "body": { "status": "error" }
+          }

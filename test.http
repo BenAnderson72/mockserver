@@ -1,3 +1,6 @@
+
+# code --install-extension humao.rest-client
+
 @url=http://localhost:5000
 GET {{url}}/api/v1/users/1
 
@@ -17,6 +20,6 @@ GET {{url}}/api/v1/users?name_like=Smith
 ###
 @url=http://localhost:5000
 GET {{url}}/api/v1/users
-x-user-id:2
+x-user-id:500
 
 # X-user-id:1

@@ -7,20 +7,28 @@
   },
   "routes": [
     {
-      "name": "Get Users",
+      "name": "Get Users by header_param X-User-ID",
       "tag": "Users",
       "method": "GET",
       "path": "/users",
-      "filter_headers": {
+      "header_params": {
         "X-User-ID": "id"
       },
+      "cases": [
+        {
+          "when": "request.headers.X-User-ID == '500'",
+          "then": {
+            "file": "mocks/503.json"
+          }
+        }
+      ],
       "mock": {
         "file": "mocks/users.json",
         "status": 200
       }
     },
     {
-      "name": "Get User By ID",
+      "name": "Get User By path_param ID",
       "tag": "Users",
       "method": "GET",
       "path": "/users/{id}",
@@ -36,9 +44,5 @@
       }
     }
     
-
-
-
-
   ]
 }
