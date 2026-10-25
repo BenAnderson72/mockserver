@@ -170,7 +170,7 @@ func (m *MockHandler) handler(c *fiber.Ctx, ctx server_utils.EContext) error {
 
 	} else {
 		// Scenario B: Process Legacy File-based Mock (Filtering supported)
-		filtered, err := parseAndFilterMockData(m.mockFileData, ctx, buildMockFilterParams(params, ctx.Headers))
+		filtered, err := parseAndFilterMockData(m.mockFileData, ctx, buildMockFilterParams(params, ctx.Headers, m.routecfg.FilterHeaders))
 		if err != nil {
 			return responseError(c, 500, "MOCK_PARSE_ERROR", err.Error(), false)
 		}

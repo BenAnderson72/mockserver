@@ -249,6 +249,9 @@ type RouteConfig struct {
 	// Expected request headers definition
 	RequestHeaders map[string]ParamDef `json:"request_headers,omitempty" yaml:"request_headers,omitempty"`
 
+	// Request headers mapped to mock data fields for filtering file-backed mocks
+	FilterHeaders map[string]string `json:"filter_headers,omitempty" yaml:"filter_headers,omitempty"`
+
 	// Schema for request body validation
 	// BodySchema map[string]interface{} `json:"body_schema,omitempty" yaml:"body_schema,omitempty"` [OLD]
 	BodySchema *JSONSchema `json:"body_schema,omitempty" yaml:"body_schema,omitempty"`
@@ -289,7 +292,6 @@ type Config struct {
 // helpers
 func (s *ServerConfig) ApplyServerDefaults() {
 
-	
 	if s.Port == 0 {
 		s.Port = 5000
 		mslogger.LogWarn("Config: server.port not set → using default 5000")

@@ -11,6 +11,9 @@
       "tag": "Users",
       "method": "GET",
       "path": "/users",
+      "filter_headers": {
+        "X-User-ID": "id"
+      },
       "mock": {
         "file": "mocks/users.json",
         "status": 200

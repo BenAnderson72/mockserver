@@ -70,19 +70,15 @@ func buildQuery(c *fiber.Ctx) map[string]string {
 	return q
 }
 
-func buildMockFilterParams(params, headers map[string]string) map[string]string {
-	filters := make(map[string]string, len(params)+len(headers))
+func buildMockFilterParams(params, headers map[string]string, filterHeaders map[string]string) map[string]string {
+	filters := make(map[string]string, len(params)+len(filterHeaders))
 	for key, value := range params {
 		filters[key] = value
 	}
 
-	for key, value := range headers {
-		key = strings.ToLower(key)
-		if !strings.HasPrefix(key, "x-user-") {
-			continue
-		}
-		field := strings.TrimPrefix(key, "x-user-")
-		if field == "" {
+	for header, field := range filterHeaders {
+		value, exists := headers[strings.ToLower(header)]
+		if !exists || field == "" {
 			continue
 		}
 		if _, exists := filters[field]; !exists {

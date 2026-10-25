@@ -380,6 +380,20 @@ GET /users?name_like=john
 GET /users?_sort=created_at&_order=desc&_page=2&_limit=10
 ```
 
+File-backed mock routes can also map request headers to fields used for filtering:
+
+```json
+{
+  "filter_headers": {
+    "X-User-ID": "id"
+  }
+}
+```
+
+With this route configuration, `X-User-ID: 42` filters the mock data by `id=42`.
+Query parameters take precedence when both a query parameter and a mapped header
+target the same field.
+
 ### Authentication Strategies
 
 #### API Key Authentication

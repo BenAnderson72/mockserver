@@ -143,6 +143,14 @@
             },
             "additionalProperties": false
           },
+          "filter_headers": {
+            "type": "object",
+            "description": "Request headers mapped to mock data fields for filtering file-backed mocks.",
+            "patternProperties": {
+              "^[A-Za-z0-9-]+$": { "type": "string", "minLength": 1 }
+            },
+            "additionalProperties": false
+          },
           "body_schema": { "type": "object", "additionalProperties": true },
           "body_example": {
             "type": ["object", "array", "string", "number", "boolean", "null"]

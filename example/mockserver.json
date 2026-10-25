@@ -318,6 +318,9 @@
       "tag": "Todos",
       "method": "GET",
       "path": "/todos",
+      "filter_headers": {
+        "X-Todo-Completed": "completed"
+      },
       "query": {
         "completed": {
           "type": "boolean",
