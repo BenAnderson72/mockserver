@@ -70,6 +70,29 @@ func buildQuery(c *fiber.Ctx) map[string]string {
 	return q
 }
 
+func buildMockFilterParams(params, headers map[string]string) map[string]string {
+	filters := make(map[string]string, len(params)+len(headers))
+	for key, value := range params {
+		filters[key] = value
+	}
+
+	for key, value := range headers {
+		key = strings.ToLower(key)
+		if !strings.HasPrefix(key, "x-user-") {
+			continue
+		}
+		field := strings.TrimPrefix(key, "x-user-")
+		if field == "" {
+			continue
+		}
+		if _, exists := filters[field]; !exists {
+			filters[field] = value
+		}
+	}
+
+	return filters
+}
+
 // shouldParseBody determines if the HTTP method typically supports a request body.
 func shouldParseBody(c *fiber.Ctx) bool {
 	switch c.Method() {

@@ -1,6 +1,6 @@
 module mockserver
 
-go 1.24.3
+go 1.23.0
 
 require (
 	github.com/brianvoe/gofakeit/v6 v6.28.0

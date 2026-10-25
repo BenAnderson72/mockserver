@@ -1,0 +1,14 @@
+@url=http://localhost:5000
+GET {{url}}/api/v1/users/1
+
+
+###
+@url=http://localhost:5000
+GET {{url}}/api/v1/users
+
+###
+@url=http://localhost:5000
+GET {{url}}/api/v1/users
+x-user-id:2
+
+# X-user-id:1

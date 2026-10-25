@@ -1,0 +1,41 @@
+{
+  "$schema": "https://opensource.trymagic.xyz/schemas/mockserver.schema.json",
+  "server": {
+    "port": 5000,
+    "api_prefix": "/api/v1",
+    "cors": { "enabled": true }
+  },
+  "routes": [
+    {
+      "name": "Get Users",
+      "tag": "Users",
+      "method": "GET",
+      "path": "/users",
+      "mock": {
+        "file": "mocks/users.json",
+        "status": 200
+      }
+    },
+    {
+      "name": "Get User By ID",
+      "tag": "Users",
+      "method": "GET",
+      "path": "/users/{id}",
+      "path_params": {
+        "id": {
+          "type": "integer",
+          "description": "Kullanıcı ID",
+          "required": true
+        }
+      },
+      "mock": {
+        "file": "mocks/users.json"
+      }
+    }
+    
+
+
+
+
+  ]
+}
