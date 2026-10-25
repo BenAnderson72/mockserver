@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"io"
 	"net/http"
+	"os"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -20,9 +21,7 @@ import (
 //go:embed server_test.go
 var testEmbedFS embed.FS
 
-//go:embed server_test.go
-var testFaviconFS embed.FS
-
+var testFaviconFS = os.DirFS("..")
 
 func makeRequest(method, url string, body interface{}, headers map[string]string) *http.Request {
 	var bodyReader io.Reader
@@ -39,21 +38,19 @@ func makeRequest(method, url string, body interface{}, headers map[string]string
 	return req
 }
 
-
 func createSafeConfig() *config.Config {
 	return &config.Config{
 		Server: config.ServerConfig{
 			Port:      5000,
 			APIPrefix: "/v1",
-			Debug:   &config.DebugConfig{Enabled: false, Path: "/__debug"},
-			Console: &config.ConsoleConfig{Enabled: false, Path: "/console", Auth: &config.ConsoleAuthConfig{Enabled: true}},
-			CORS:    &config.CORSConfig{Enabled: false},
-			Auth:    &config.AuthConfig{Enabled: false},
+			Debug:     &config.DebugConfig{Enabled: false, Path: "/__debug"},
+			Console:   &config.ConsoleConfig{Enabled: false, Path: "/console", Auth: &config.ConsoleAuthConfig{Enabled: true}},
+			CORS:      &config.CORSConfig{Enabled: false},
+			Auth:      &config.AuthConfig{Enabled: false},
 		},
 		Routes: []config.RouteConfig{},
 	}
 }
-
 
 // 1. SIMPLE MOCK TEST
 func TestIntegration_SimpleMock(t *testing.T) {
@@ -84,7 +81,6 @@ func TestIntegration_SimpleMock(t *testing.T) {
 	bodyBytes, _ := io.ReadAll(resp.Body)
 	assert.JSONEq(t, `{"message": "world"}`, string(bodyBytes))
 }
-
 
 // 2. LOGIC ENGINE & CASES TEST
 func TestIntegration_LogicCases(t *testing.T) {
@@ -127,7 +123,6 @@ func TestIntegration_LogicCases(t *testing.T) {
 	bodyNorm, _ := io.ReadAll(respNorm.Body)
 	assert.JSONEq(t, `{"price": 100}`, string(bodyNorm))
 }
-
 
 // 3. STATEFUL INTEGRATION TEST
 func TestIntegration_StatefulFlow(t *testing.T) {
@@ -193,7 +188,6 @@ func TestIntegration_StatefulFlow(t *testing.T) {
 	assert.Contains(t, string(bodyGet), "CTO")
 }
 
-
 // 4. AUTH TEST
 func TestIntegration_Auth(t *testing.T) {
 	cfg := createSafeConfig()
@@ -228,7 +222,6 @@ func TestIntegration_Auth(t *testing.T) {
 	respSuccess, _ := app.Test(reqSuccess)
 	assert.Equal(t, 200, respSuccess.StatusCode)
 }
-
 
 // 5. FETCH (PROXY) TEST
 func TestIntegration_Fetch(t *testing.T) {
