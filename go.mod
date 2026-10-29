@@ -1,4 +1,4 @@
-module https://github.com/BenAnderson72/mockserver
+module github.com/BenAnderson72/mockserver
 
 go 1.23.0
 
